@@ -72,7 +72,7 @@ addons:
     - gengetopt
     - help2man
     - ccache
-    update: true
+    #update: true
 
 before_install:
   # add magic notarization flags for macOS, see https://github.com/akeru-inc/xcnotary/blob/master/README.md
