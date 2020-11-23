@@ -73,7 +73,7 @@ before_install:
         brew update;
         brew install libtool gengetopt help2man ccache;
         export PATH="/usr/local/opt/ccache/libexec:$PATH";
-        export CC="ccache clang" CXX="ccache clang++;
+        export CC="ccache clang" CXX="ccache clang++";
         git clone https://github.com/frankmorgner/OpenSCToken.git;
     fi
   - if [ "$TRAVIS_OS_NAME" = "osx" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
