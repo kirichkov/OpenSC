@@ -70,8 +70,6 @@ addons:
 before_install:
   # add magic notarization flags for macOS, see https://github.com/akeru-inc/xcnotary/blob/master/README.md
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then
-        brew remove --force $(brew list);
-        brew update;
         brew install libtool gengetopt help2man ccache;
         export PATH="/usr/local/opt/ccache/libexec:$PATH";
         export CC="ccache clang" CXX="ccache clang++";
