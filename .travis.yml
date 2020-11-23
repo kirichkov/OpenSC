@@ -68,17 +68,16 @@ addons:
     - cmake
   homebrew:
     packages:
-    - libtool
-    - gengetopt
-    - help2man
-    - ccache
+      - libtool
+      - gengetopt
+      - help2man
+      - ccache
     #update: true
 
 before_install:
   # add magic notarization flags for macOS, see https://github.com/akeru-inc/xcnotary/blob/master/README.md
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then
         export PATH="/usr/local/opt/ccache/libexec:$PATH";
-        export CC="ccache clang" CXX="ccache clang++";
         git clone https://github.com/frankmorgner/OpenSCToken.git;
     fi
   - if [ "$TRAVIS_OS_NAME" = "osx" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
@@ -354,15 +353,11 @@ after_script:
       rm -f .github/secrets.tar;
     fi
 
-before_cache:
-  - brew cleanup
-
 cache:
   apt: true
   ccache: true
   directories:
     - $HOME/.m2/
-    - $HOME/Library/Caches/Homebrew
     - openssl_bin
     - openpace_bin
     - isetup
