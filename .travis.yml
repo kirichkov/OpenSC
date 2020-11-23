@@ -66,17 +66,23 @@ addons:
     - ant
     - socat
     - cmake
-  homebrew:
-    packages:
-      - libtool
-      - gengetopt
-      - help2man
-      - ccache
-    #update: true
 
 before_install:
-  # add magic notarization flags for macOS, see https://github.com/akeru-inc/xcnotary/blob/master/README.md
+  # homebrew is dead slow in older images due to the many updates it would need to download and build.
+  # here, we build the additional dependencies manually to get around this
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then
+        curl https://ftp.gnu.org/gnu/gengetopt/gengetopt-2.23.tar.xz -L --output gengetopt-2.23.tar.xz;
+        tar xfj gengetopt-2.23.tar.xz;
+        pushd gengetopt-2.23;
+        ./configure && make;
+        sudo make install;
+        popd;
+        curl https://ftp.gnu.org/gnu/help2man/help2man-1.47.16.tar.xz -L --output help2man-1.47.16.tar.xz;
+        tar xjf help2man-1.47.16.tar.xz;
+        pushd help2man-1.47.16;
+        ./configure && make;
+        sudo make install;
+        popd;
         export PATH="/usr/local/opt/ccache/libexec:$PATH";
         git clone https://github.com/frankmorgner/OpenSCToken.git;
     fi
