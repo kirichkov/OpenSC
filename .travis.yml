@@ -66,11 +66,17 @@ addons:
     - ant
     - socat
     - cmake
+  homebrew:
+    packages:
+    - libtool
+    - gengetopt
+    - help2man
+    - ccache
+    update: true
 
 before_install:
   # add magic notarization flags for macOS, see https://github.com/akeru-inc/xcnotary/blob/master/README.md
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then
-        brew install libtool gengetopt help2man ccache;
         export PATH="/usr/local/opt/ccache/libexec:$PATH";
         export CC="ccache clang" CXX="ccache clang++";
         git clone https://github.com/frankmorgner/OpenSCToken.git;
