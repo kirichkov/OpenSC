@@ -590,7 +590,12 @@ CK_RV C_GetSlotInfo(CK_SLOT_ID slotID, CK_SLOT_INFO_PTR pInfo)
 		}
 	}
 
-	if (rv == CKR_TOKEN_NOT_PRESENT || rv == CKR_TOKEN_NOT_RECOGNIZED)
+	if (rv == CKR_TOKEN_NOT_PRESENT || rv == CKR_TOKEN_NOT_RECOGNIZED
+			/* The sub-routines are loosing the context of "C_GetSlotInfo" and
+			 * return a different default value for SC_ERROR_INVALID_CARD than
+			 * CKR_TOKEN_NOT_RECOGNIZED.  Explicitly check for that default
+			 * value, here */
+			|| rv == sc_to_cryptoki_error(SC_ERROR_INVALID_CARD, NULL))
 		rv = CKR_OK;
 
 	if (rv == CKR_OK)
