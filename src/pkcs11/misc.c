@@ -52,6 +52,9 @@ static struct sc_to_cryptoki_error_conversion sc_to_cryptoki_error_map[]  = {
 	{ "C_OpenSession",		SC_ERROR_INVALID_CARD,		CKR_TOKEN_NOT_RECOGNIZED},
 	{ "C_OpenSession",		SC_ERROR_WRONG_CARD,		CKR_TOKEN_NOT_RECOGNIZED},
 	{ "C_OpenSession",		SC_ERROR_NO_CARD_SUPPORT,		CKR_TOKEN_NOT_RECOGNIZED},
+	{ "C_GetSlotInfo",		SC_ERROR_INVALID_CARD,		CKR_TOKEN_NOT_RECOGNIZED},
+	{ "C_GetSlotInfo",		SC_ERROR_WRONG_CARD,		CKR_TOKEN_NOT_RECOGNIZED},
+	{ "C_GetSlotInfo",		SC_ERROR_NO_CARD_SUPPORT,		CKR_TOKEN_NOT_RECOGNIZED},
 	{NULL, 0, 0}
 };
 
